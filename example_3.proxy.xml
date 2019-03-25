@@ -1,0 +1,5 @@
+<CollisionSetup>
+  <Exclude>
+    <FramePair first="my_robot_1.*" second="my_robot_2.*"/>
+  </Exclude>
+</CollisionSetup>

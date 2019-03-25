@@ -1,0 +1,15 @@
+<WorkCell xmlns:xacro="http://www.ros.org/wiki/xacro" name="example_3">
+  
+  <Frame name="robot_1" refframe="WORLD"/>
+  <xacro:property name="robotid" value="1"/>
+  <xacro:property name="trans" value="1"/> <!-- this robot is solid -->
+  <xacro:include filename="my_robot.xacro"/>
+  
+  <Frame name="robot_2" refframe="WORLD"/>
+  <xacro:property name="robotid" value="2"/>
+  <xacro:property name="trans" value="0.3"/> <!-- this robot is transparent -->
+  <xacro:include filename="my_robot.xacro"/>
+  
+  <CollisionSetup file="example_3.proxy.xml"/>
+  
+</WorkCell>

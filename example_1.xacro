@@ -1,0 +1,20 @@
+<WorkCell xmlns:xacro="http://www.ros.org/wiki/xacro" name="example_1">
+  
+  
+  <xacro:property name="box_position_x" value="1" />
+  <xacro:property name="box_position_y" value="2" />
+  <xacro:property name="box_size" value="0.45" />
+  
+  <Frame name="box" refframe="WORLD">
+    <RPY>0 0 0</RPY>
+    <Pos>${box_position_x} ${box_position_y} 0</Pos>
+    <Property name="ShowFrameAxis">true</Property>
+    <Drawable name="box_geo">
+      <RPY>0 0 0</RPY>
+      <Pos>0 0 ${box_size/2}</Pos>
+      <RGB>1 0 0</RGB>
+      <Box x="${box_size}" y="${box_size}" z="${box_size}"/>
+    </Drawable>
+  </Frame>
+  
+</WorkCell>

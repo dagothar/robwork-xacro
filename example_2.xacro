@@ -1,0 +1,44 @@
+<WorkCell xmlns:xacro="http://www.ros.org/wiki/xacro" name="example_2">
+  
+  
+  <xacro:property name="start_box_width" value="0.15"/>
+  <xacro:property name="delta_box_width" value="0.01"/>
+  
+  <!-- this macro draws a box with id, color (r, g, b) and size at position (x, y) -->
+  <xacro:macro name="box" params="id x y r g b size">
+    <Frame name="box_${id}" refframe="WORLD">
+      <RPY>0 0 0</RPY>
+      <Pos>${x} ${y} 0</Pos>
+      <Property name="ShowFrameAxis">true</Property>
+      <Drawable name="box_geo_${id}">
+        <RPY>0 0 0</RPY>
+        <Pos>0 0 ${size/2}</Pos>
+        <RGB>${r} ${g} ${b}</RGB>
+        <Box x="${size}" y="${size}" z="${size}"/>
+      </Drawable>
+    </Frame>
+  </xacro:macro>
+  
+  <!-- this macro makes a line of boxes along x axis at specified y coordinate -->
+  <xacro:macro name="box_line" params="i j y g size">
+    <xacro:box id="${i}_${j}" x="${i*0.5-3}" y="${y}" r="${i/11}" g="${g}" b="0" size="${size+i*delta_box_width}"/>
+    
+    <!-- this is how you loop things (recurrence): -->
+    <xacro:if value="${i-1}">
+      <xacro:box_line i="${i-1}" j="${j}" y="${y}" g="${g}" size="${size}"/>
+    </xacro:if>
+  </xacro:macro>
+  
+  <!-- this macro draws a square of boxes -->
+  <xacro:macro name="box_square" params="j">
+    <xacro:box_line i="11" j="${j}" y="${j*0.5-3}" g="${j/11}" size="${start_box_width+j*delta_box_width}"/>
+    
+    <xacro:if value="${j-1}">
+      <xacro:box_square j="${j-1}"/>
+    </xacro:if>
+  </xacro:macro>
+  
+  <!-- use the macro -->
+  <xacro:box_square j="11"/>
+  
+</WorkCell>
